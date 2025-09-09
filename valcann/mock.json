@@ -1,0 +1,26 @@
+[ 
+    { 
+        "nome": "backup1.tar.gz",
+        "tamanho_bytes": 52428800,
+        "data_criacao": "2025-09-09T10:30:00Z",
+        "ultima_modificacao": "2025-09-07T12:00:00Z"
+    },
+    {
+        "nome": "backup2.tar.gz",
+        "tamanho_bytes": 73400320,
+        "data_criacao": "2025-09-09T15:10:00Z",
+        "ultima_modificacao": "2025-09-06T15:20:00Z"
+    },
+    {
+        "nome": "backup3.tar.gz",
+        "tamanho_bytes": 104857600,
+        "data_criacao": "2025-09-03T08:45:00Z",
+        "ultima_modificacao": "2025-09-03T09:00:00Z"
+    },
+    {
+        "nome": "backup4.tar.gz",
+        "tamanho_bytes": 15728640,
+        "data_criacao": "2025-09-01T20:00:00Z",
+        "ultima_modificacao": "2025-09-01T20:05:00Z"
+    }
+]
