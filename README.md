@@ -35,7 +35,43 @@
 - **Q3: Obter Benchmark com seus Controles e o estado em uma data/hora X**  
   Fazer um JOIN entre **Benchmark**, **Controle** e **ControleHistorico**, pegando para cada controle a última linha de **ControleHistorico** com **date <= X**.
 
+## ⚡ Etapa de Índices
+
+Para otimizar as consultas Q1, Q2 e Q3, foram definidos os seguintes índices:
+
+### 1. Índice em `Controle(benchmark_id)`
+
+```sql
+CREATE INDEX idx_controle_benchmark_id ON Controle(benchmark_id);
+```
+
+- **Motivação:** acelera os JOINs entre `Benchmark` e `Controle`.  
+- **Benefício:** evita varredura completa na tabela `Controle` ao buscar todos os controles de um benchmark.  
+- **Atende:** cenário **Q1**.
+
 ---
+
+### 2. Índice composto em `ControleHistorico(controle_id, date)`
+
+```sql
+CREATE INDEX idx_historico_controle_id_date ON ControleHistorico(controle_id, date);
+```
+
+- **Motivação:** consultas históricas filtram por `controle_id` e intervalo de `date`.  
+- **Benefício:** permite localizar rapidamente eventos de um controle em uma faixa de tempo, além de ajudar em ordenações por data.  
+- **Atende:** cenário **Q2**.
+
+---
+
+### 3. Índice composto decrescente em `ControleHistorico(controle_id, date DESC)`
+
+```sql
+CREATE INDEX idx_historico_controle_date_desc ON ControleHistorico(controle_id, date DESC);
+```
+
+- **Motivação:** recuperar o último estado de cada controle antes de uma data X.  
+- **Benefício:** evita varredura completa do histórico, retornando de forma eficiente o registro mais recente (útil para `ORDER BY date DESC LIMIT 1`).  
+- **Atende:** cenário **Q3**.
 
 # 2ª Questão: Automação de Ambientes Operacionais
 
